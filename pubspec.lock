@@ -117,10 +117,10 @@ packages:
     dependency: transitive
     description:
       name: cross_file
-      sha256: "74a4727e030347edff3b6e5256b7fb0c3de8af8ed278e6c56718760786a1fa40"
+      sha256: "55d7b444feb71301ef6b8838dbc1ae02e63dd48c8773f3810ff53bb1e2945b32"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.4"
+    version: "0.3.4+1"
   crypto:
     dependency: transitive
     description:
@@ -442,7 +442,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "43b8590c2fcb42ddf23b055a6bbc1247e67e928a"
+      resolved-ref: e50494be1c31f5abe6201e2bdc504fcb19375877
       url: "https://github.com/edward-reynara/forisa_package.git"
     source: git
     version: "0.0.1"
@@ -546,10 +546,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_platform_interface
-      sha256: fa4e815e6fcada50e35718727d83ba1c92f1edf95c0b4436554cec301b56233b
+      sha256: "3d2c323daea9d60608f1caf30be32a938916f4975434b8352e6f73dae496da38"
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.3"
+    version: "2.9.4"
   image_picker_windows:
     dependency: transitive
     description:
@@ -766,14 +766,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.4"
-  platform_device_id:
-    dependency: transitive
-    description:
-      name: platform_device_id
-      sha256: "7a12ec84de4a823bb10eba2f0e1ad29e2365abba17790489a0d78029904f562e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   platform_device_id_linux:
     dependency: transitive
     description:
@@ -795,6 +787,14 @@ packages:
     description:
       name: platform_device_id_platform_interface
       sha256: c61607594252aaddacf3e4c4371ab08f2ef85ff427817fa6e48a169429610c46
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  platform_device_id_v3:
+    dependency: transitive
+    description:
+      name: platform_device_id_v3
+      sha256: "022fa690995fe100274793c1a0442b44a351f95760d09ca4e56a76f2f4095658"
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
