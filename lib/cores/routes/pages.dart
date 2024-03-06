@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import '../../ui/pages/HomePage.dart';
 import '../../ui/pages/LoginPage.dart';
+import '../../ui/pages/MainLayout.dart';
 import '../../ui/pages/NotFoundPage.dart';
 import '../../ui/pages/OnBoardingPage.dart';
 import '../../ui/pages/SplashScreenPage.dart';
@@ -55,10 +56,10 @@ class CorePages {
     //   name: Routes.RESELLER_SEARCH_PAGE,
     //   page: () => ResellerSearchPage(),
     // ),
-    // GetPage(
-    //     name: Routes.MAIN_LAYOUT,
-    //     page: () => MainLayout(),
-    //     binding: HomeBinding()),
+    GetPage(
+        name: Routes.MAIN_LAYOUT,
+        page: () => MainLayout(),
+        binding: HomeBinding()),
     // GetPage(
     //   name: Routes.PRODUCT_SEARCH_PAGE,
     //   page: () => ProductSearchPage(),
