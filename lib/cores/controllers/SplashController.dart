@@ -79,9 +79,11 @@ class SplashController extends GetxController {
       } else {
         checkDoneOnboarding();
       }
-    } on APIResponsePlain catch (e) {
+    }
+    on APIResponsePlain catch (e) {
       errorPageLoading.value = e;
-    } finally {
+    }
+    finally {
       isPageLoading.value = false;
     }
   }

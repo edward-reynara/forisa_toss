@@ -335,7 +335,7 @@ packages:
     source: hosted
     version: "3.0.1"
   flutter_localizations:
-    dependency: transitive
+    dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -442,7 +442,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: e50494be1c31f5abe6201e2bdc504fcb19375877
+      resolved-ref: "8c0f0dcd9a103eeaa694e468caa27d13dd29256e"
       url: "https://github.com/edward-reynara/forisa_package.git"
     source: git
     version: "0.0.1"

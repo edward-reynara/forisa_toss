@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
       getPages: CorePages.pages,
       initialBinding: InitialBinding(),
       defaultTransition: Transition.cupertino,
-      // routingCallback: (_) => print('Route: ${_?.current ?? 'Unknown Route'}'),
+      routingCallback: (_) => print('Route: ${_?.current ?? 'Unknown Route'}'),
       navigatorObservers: [
         SentryNavigatorObserver(),
       ],
