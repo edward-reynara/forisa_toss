@@ -1,116 +1,102 @@
-// import 'package:ResellerSalesMobile/cores/bindings/binding_init.dart';
-// import 'package:ResellerSalesMobile/cores/configs/config_app.dart';
-// import 'package:ResellerSalesMobile/cores/configs/config_theme.dart';
-// import 'package:ResellerSalesMobile/cores/data/models/user_model.dart';
-// import 'package:ResellerSalesMobile/cores/data/providers/provider_pref.dart';
-// import 'package:ResellerSalesMobile/cores/routes/pages.dart';
-// import 'package:ResellerSalesMobile/cores/utils/NotificationHandler.dart';
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:forisa_package/providers/provider_pref.dart';
-import 'package:get/get.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'package:forisa_attendance/utils/one_signal_opened_handler.dart';
+import 'package:forisa_toss/ui/pages/notfound_page.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'cores/configs/config.dart';
+import 'cores/utils/router_service.dart' as router;
+import 'cores/utils/locator.dart';
+import 'cores/utils/navigation_service.dart';
+import 'cores/utils/route_obeserver.dart';
 
-import 'cores/bindings/binding_init.dart';
-import 'cores/configs/config_app.dart';
-import 'cores/configs/config_theme.dart';
-import 'cores/data/models/user_model.dart';
-import 'cores/routes/pages.dart';
-
+FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) async {
+    setupLocator();
     Intl.defaultLocale = 'id_ID';
-    initializeDateFormatting();
-    // await initOneSignalPlatform();
-    // final GoogleMapsFlutterPlatform mapsImplementation =
-    //     GoogleMapsFlutterPlatform.instance;
-    // if (mapsImplementation is GoogleMapsFlutterAndroid) {
-    //   mapsImplementation.useAndroidViewSurface = true;
-    //   initializeMapRenderer();
-    // }
-    if (ConfigApp.env == Env.production) {
-      String? userModel =
-      await PrefProvider.secureStorage.read(key: PrefProvider.USER_DATA);
+    await initializeDateFormatting();
+    //await Jiffy.locale('id');
+    await Jiffy.setLocale('id');
+    if (!Config.isDebugMode) {
+      // await initOneSignalPlatform();
+      String? nik = await _secureStorage.read(key: 'nik');
+      String? name = await _secureStorage.read(key: 'name');
+
       await SentryFlutter.init(
             (options) {
-          options.dsn = ConfigApp.sentryDsn;
+          options.dsn = Config.sentryDsn;
         },
-        appRunner: () => runApp(const MyApp()),
+        appRunner: () => runApp(MyApp()),
       );
-      if (userModel != null) {
-        UserModel user = userModelFromJson(userModel);
-        await Sentry.configureScope((scope) async => await scope.setUser(
-          SentryUser(
-            id: user.loginId,
-            email: user.email,
-            username: user.userName,
-          ),
-        ));
-      }
+      await Sentry.configureScope((scope) async => await scope.setUser(
+        SentryUser(
+          id: nik ?? '0',
+          username: name ?? 'New User',
+        ),
+      ));
     } else {
-      runApp(const MyApp());
+      runApp(MyApp());
     }
+    configLoading();
   });
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Sales Mobile Reseller',
-      locale: const Locale('id', 'ID'),
-      theme: ConfigTheme.lightTheme(context),
-      initialRoute: Routes.INITIAL,
-      unknownRoute: CorePages.unknownPage,
-      getPages: CorePages.pages,
-      initialBinding: InitialBinding(),
-      defaultTransition: Transition.cupertino,
-      routingCallback: (_) => print('Route: ${_?.current ?? 'Unknown Route'}'),
-      navigatorObservers: [
-        SentryNavigatorObserver(),
-      ],
-      debugShowCheckedModeBanner: false,
-    );
-  }
+void configLoading() {
+  EasyLoading.instance
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..dismissOnTap = false
+    ..maskType = EasyLoadingMaskType.black
+    ..userInteractions = false;
 }
 
 // Future<void> initOneSignalPlatform() async {
 //   OneSignal.shared.setLogLevel(OSLogLevel.none, OSLogLevel.none);
 //   OneSignal.shared.setNotificationOpenedHandler(
-//           (result) => NotificationHandler.handleNotificationOpened(result));
-//   await OneSignal.shared.setAppId(ConfigApp.oneSignalAPIKey);
+//           (result) => OnesignalOpenedHandler.handleNotification(result));
+//   await OneSignal.shared.setAppId(Config.onesignalAppId);
 // }
+
+// Future<ByteData> loadCert() async {
+//   ByteData bytes = await rootBundle.load('assets/images/forisa.pem');
 //
-// Completer<AndroidMapRenderer?>? _initializedRendererCompleter;
-//
-// Future<AndroidMapRenderer?> initializeMapRenderer() async {
-//   if (_initializedRendererCompleter != null) {
-//     return _initializedRendererCompleter!.future;
-//   }
-//
-//   final Completer<AndroidMapRenderer?> completer =
-//   Completer<AndroidMapRenderer?>();
-//   _initializedRendererCompleter = completer;
-//
-//   WidgetsFlutterBinding.ensureInitialized();
-//
-//   final GoogleMapsFlutterPlatform mapsImplementation =
-//       GoogleMapsFlutterPlatform.instance;
-//   if (mapsImplementation is GoogleMapsFlutterAndroid) {
-//     unawaited(mapsImplementation
-//         .initializeWithRenderer(AndroidMapRenderer.latest)
-//         .then((AndroidMapRenderer initializedRenderer) =>
-//         completer.complete(initializedRenderer)));
-//   } else {
-//     completer.complete(null);
-//   }
-//
-//   return completer.future;
+//   return bytes;
 // }
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: (Config.isDebugMode),
+      theme: ThemeData(
+        canvasColor: Colors.grey[200],
+        primaryColor: Colors.green,
+        colorScheme: Theme.of(context)
+            .colorScheme
+            .copyWith(primary: Colors.green, secondary: Colors.orange),
+      ),
+      // home: Splash(),
+      initialRoute: '/',
+      navigatorKey: locator<NavigationService>().navigatorKey,
+      onGenerateRoute: (settings) => router.generateRoute(settings),
+      onUnknownRoute: (RouteSettings routeSettings) => CupertinoPageRoute(
+        builder: (context) => NotFound(),
+      ),
+      navigatorObservers: [
+        locator<RouteObserverService>().routeObserver,
+        SentryNavigatorObserver(),
+      ],
+      builder: EasyLoading.init(),
+    );
+  }
+}
