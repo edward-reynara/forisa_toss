@@ -15,7 +15,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:forisa_attendance/utils/locator.dart';
 // import 'package:forisa_attendance/utils/route_obeserver.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:safe_device/safe_device.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../cores/components/error_future_component.dart';
@@ -219,16 +218,7 @@ class _SplashState extends State<Splash> with RouteAware {
     Response response;
     AppVersion appVersion;
 
-    bool isRealDevice = await SafeDevice.isRealDevice;
-    _packageInfo = await PackageInfo.fromPlatform();
-
     try {
-      //TODO : change when prod = !isRealDevice
-      if (!isRealDevice) {
-        throw Exception(
-            'Anda terdeteksi menggunakan emulator, gunakan real device!');
-      }
-
       response = await dio.get('/version', queryParameters: {
         'platform': Platform.operatingSystem
       });
