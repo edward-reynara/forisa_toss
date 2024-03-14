@@ -4,19 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:forisa_attendance/components/error_future_component.dart';
-// import 'package:forisa_attendance/components/loaders.dart';
-// import 'package:forisa_attendance/config/config.dart';
-// import 'package:forisa_attendance/config/states.dart';
-// import 'package:forisa_attendance/models/model_app_version.dart';
-// import 'package:forisa_attendance/models/model_arguments.dart';
-// import 'package:forisa_attendance/utils/api_service.dart';
-// import 'package:forisa_attendance/utils/constants.dart';
-// import 'package:forisa_attendance/utils/locator.dart';
-// import 'package:forisa_attendance/utils/route_obeserver.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import '../../cores/components/error_future_component.dart';
 import '../../cores/components/loaders.dart';
 import '../../cores/configs/config.dart';
@@ -30,12 +19,14 @@ import '../../cores/utils/route_obeserver.dart';
 import '../../cores/utils/tools.dart';
 
 class Splash extends StatefulWidget {
+  const Splash({super.key});
+
   @override
   _SplashState createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> with RouteAware {
-  FlutterSecureStorage secureStorage = FlutterSecureStorage();
+  FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   ApiService apiService = ApiService();
   late PackageInfo _packageInfo;
   late AppVersion _appVersion;
@@ -86,7 +77,7 @@ class _SplashState extends State<Splash> with RouteAware {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
+                        const Text(
                           'Memeriksa perangkat...',
                         ),
                         Text(Config.env.name),
@@ -124,7 +115,7 @@ class _SplashState extends State<Splash> with RouteAware {
                         ),
                       ),
                       defaultLoader(),
-                      Text(
+                      const Text(
                         'Mengarahkan ke home screen...',
                       ),
                     ],
@@ -133,7 +124,7 @@ class _SplashState extends State<Splash> with RouteAware {
               } else {
                 return Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10.0),
@@ -148,7 +139,7 @@ class _SplashState extends State<Splash> with RouteAware {
                           height: 150.0,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30.0),
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               image:
                                   AssetImage(IMG.iconSuccess),
                               fit: BoxFit.cover,
@@ -156,37 +147,37 @@ class _SplashState extends State<Splash> with RouteAware {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
-                        Text(
+                        const Text(
                           'Update tersedia !',
                           style: TextStyle(
                             fontSize: 22.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'Versi aplikasi anda sudah terlalu lama',
                           style: TextStyle(
                             fontSize: 16,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
                         ElevatedButton.icon(
                           style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.green),
-                            shape: MaterialStateProperty.all(StadiumBorder()),
+                            shape: MaterialStateProperty.all(const StadiumBorder()),
                           ),
-                          icon: Icon(
+                          icon: const Icon(
                             FontAwesomeIcons.cloudDownloadAlt,
                             color: Colors.white,
                             size: 14.0,
                           ),
-                          label: Text(
+                          label: const Text(
                             'Download',
                             style: TextStyle(color: Colors.white),
                           ),
@@ -217,13 +208,13 @@ class _SplashState extends State<Splash> with RouteAware {
     Dio dio = apiService.getApiClient(context: context);
     Response response;
     AppVersion appVersion;
+    _packageInfo = await PackageInfo.fromPlatform();
 
     try {
       response = await dio.get('/version', queryParameters: {
         'platform': Platform.operatingSystem
       });
       appVersion = AppVersion.fromJson(response.data);
-
       String? buildNumber = await secureStorage.read(key: 'build_number');
 
       if (buildNumber == null) {
@@ -234,7 +225,7 @@ class _SplashState extends State<Splash> with RouteAware {
           // ApiService.getCacheManager().clearAll();
           await secureStorage.write(
               key: 'build_number', value: _packageInfo.buildNumber);
-          // print('Cache cleared!');
+          // //('Cache cleared!');
         }
       }
 

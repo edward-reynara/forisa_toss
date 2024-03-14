@@ -26,7 +26,6 @@ void main() {
     setupLocator();
     Intl.defaultLocale = 'id_ID';
     await initializeDateFormatting();
-    //await Jiffy.locale('id');
     await Jiffy.setLocale('id');
     if (!Config.isDebugMode) {
       // await initOneSignalPlatform();
@@ -37,7 +36,7 @@ void main() {
             (options) {
           options.dsn = Config.sentryDsn;
         },
-        appRunner: () => runApp(MyApp()),
+        appRunner: () => runApp(const MyApp()),
       );
       await Sentry.configureScope((scope) async => await scope.setUser(
         SentryUser(
@@ -46,7 +45,7 @@ void main() {
         ),
       ));
     } else {
-      runApp(MyApp());
+      runApp(const MyApp());
     }
     configLoading();
   });
@@ -67,13 +66,9 @@ void configLoading() {
 //   await OneSignal.shared.setAppId(Config.onesignalAppId);
 // }
 
-// Future<ByteData> loadCert() async {
-//   ByteData bytes = await rootBundle.load('assets/images/forisa.pem');
-//
-//   return bytes;
-// }
-
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,7 +80,6 @@ class MyApp extends StatelessWidget {
             .colorScheme
             .copyWith(primary: Colors.green, secondary: Colors.orange),
       ),
-      // home: Splash(),
       initialRoute: '/',
       navigatorKey: locator<NavigationService>().navigatorKey,
       onGenerateRoute: (settings) => router.generateRoute(settings),

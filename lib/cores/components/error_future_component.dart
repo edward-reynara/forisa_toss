@@ -58,7 +58,7 @@ Container errorFutureContainer({
         title = 'Server Maintenance';
         desc = 'Server sedang dalam pemeliharaan';
       } else {
-        title = code.toString() + ' ' + e.response!.statusMessage!;
+        title = '$code ${e.response!.statusMessage!}';
         code = 0;
       }
     } else {
@@ -86,14 +86,14 @@ Container errorFutureContainer({
             borderRadius: BorderRadius.circular(30.0),
             image: DecorationImage(
               image: AssetImage(
-                  'assets/images/errors/' + code.toString() + '.png'),
+                  'assets/images/errors/$code.png'),
               fit: BoxFit.cover,
               alignment: Alignment.center,
               repeat: ImageRepeat.noRepeat,
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20.0,
         ),
         Column(
@@ -105,8 +105,8 @@ Container errorFutureContainer({
                 content: Text(stackTrace),
               )),
               child: Text(
-                '($code) ' + title,
-                style: TextStyle(
+                '($code) $title',
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22.0,
                 ),
@@ -114,7 +114,7 @@ Container errorFutureContainer({
             ),
             Text(
               desc,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18.0,
               ),
               textAlign: TextAlign.center,
