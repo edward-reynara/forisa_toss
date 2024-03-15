@@ -116,7 +116,7 @@ PreferredSizeWidget searchAppBar(
     ),
     actions: [
       IconButton(
-          icon: const Icon(FontAwesomeIcons.search),
+          icon: const Icon(FontAwesomeIcons.magnifyingGlass),
           onPressed: () {
             onSubmit();
             FocusManager.instance.primaryFocus?.unfocus();

@@ -100,10 +100,6 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
                     label: 'Beranda',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(FontAwesomeIcons.idCard),
-                    label: 'ID Card',
-                  ),
-                  BottomNavigationBarItem(
                     icon: Icon(FontAwesomeIcons.userCircle),
                     label: 'Profil',
                   ),

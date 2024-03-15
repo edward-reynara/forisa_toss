@@ -255,7 +255,7 @@ class _SplashState extends State<Splash> with RouteAware {
     String? doneIntro = await secureStorage.read(key: 'intro');
     await initStore();
 
-    if (doneIntro == 'true') {
+    // if (doneIntro == 'true') {
       String? token = await secureStorage.read(key: 'token');
       if (token != null) {
         Navigator.of(context).pushReplacementNamed('/layout',
@@ -263,9 +263,9 @@ class _SplashState extends State<Splash> with RouteAware {
       } else {
         Navigator.of(context).pushReplacementNamed('/login');
       }
-    } else {
-      Navigator.of(context).pushReplacementNamed('/onboarding');
-    }
+    // } else {
+    //   Navigator.of(context).pushReplacementNamed('/onboarding');
+    // }
   }
 
   Future<void> initStore() async {

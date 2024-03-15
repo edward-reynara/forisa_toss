@@ -11,7 +11,7 @@ class FullScreenImage extends StatefulWidget {
   final List<String> imgUrl;
   final bool isOutSide;
 
-  FullScreenImage(this.baseUrl, this.imgUrl, this.isOutSide);
+  const FullScreenImage(this.baseUrl, this.imgUrl, this.isOutSide, {super.key});
 
   @override
   _FullScreenImageState createState() => _FullScreenImageState();
@@ -33,39 +33,37 @@ class _FullScreenImageState extends State<FullScreenImage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),
-      body: Container(
-        child: Stack(
-          alignment: Alignment.bottomRight,
-          children: <Widget>[
-            PhotoViewGallery.builder(
-              builder: (context, index) {
-                return PhotoViewGalleryPageOptions(
-                  imageProvider: CachedNetworkImageProvider(
-                    widget.isOutSide
-                        ? widget.imgUrl[index]
-                        : widget.baseUrl + widget.imgUrl[index],
-                    headers: locator<States>().headers,
-                  ),
-                  minScale: PhotoViewComputedScale.contained * 0.8,
-                  maxScale: PhotoViewComputedScale.contained * 4,
-                );
-              },
-              itemCount: widget.imgUrl.length,
-              onPageChanged: onPageChanged,
-              scrollDirection: Axis.horizontal,
-            ),
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'Foto ke $counterIndex dari ${widget.imgUrl.length}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
+      body: Stack(
+        alignment: Alignment.bottomRight,
+        children: <Widget>[
+          PhotoViewGallery.builder(
+            builder: (context, index) {
+              return PhotoViewGalleryPageOptions(
+                imageProvider: CachedNetworkImageProvider(
+                  widget.isOutSide
+                      ? widget.imgUrl[index]
+                      : widget.baseUrl + widget.imgUrl[index],
+                  headers: locator<States>().headers,
                 ),
+                minScale: PhotoViewComputedScale.contained * 0.8,
+                maxScale: PhotoViewComputedScale.contained * 4,
+              );
+            },
+            itemCount: widget.imgUrl.length,
+            onPageChanged: onPageChanged,
+            scrollDirection: Axis.horizontal,
+          ),
+          Container(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              'Foto ke $counterIndex dari ${widget.imgUrl.length}',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

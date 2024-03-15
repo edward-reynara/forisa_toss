@@ -20,7 +20,7 @@ Shimmer fullWidthColShimmer(bool enabled) => Shimmer.fromColors(
                       backgroundColor: ColorPalete.shimmerInitColor,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10.0,
                   ),
                   Text(
@@ -55,7 +55,7 @@ Shimmer fullWidthColShimmer(bool enabled) => Shimmer.fromColors(
                       backgroundColor: ColorPalete.shimmerInitColor,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10.0,
                   ),
                   Text(
@@ -90,7 +90,7 @@ Shimmer fullWidthColShimmer(bool enabled) => Shimmer.fromColors(
                       backgroundColor: ColorPalete.shimmerInitColor,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10.0,
                   ),
                   Text(
@@ -125,7 +125,7 @@ Shimmer fullWidthColShimmer(bool enabled) => Shimmer.fromColors(
                       backgroundColor: ColorPalete.shimmerInitColor,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10.0,
                   ),
                   Text(
@@ -159,7 +159,7 @@ Shimmer rectHorizonListShimmer(bool enabled, BuildContext buildContext) =>
       highlightColor: ColorPalete.shimmerHighlightColor,
       enabled: enabled,
       child: Container(
-        margin: EdgeInsets.only(right: 15.0),
+        margin: const EdgeInsets.only(right: 15.0),
         width: MediaQuery.of(buildContext).size.width * 0.4,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
@@ -171,10 +171,10 @@ Shimmer rectHorizonListShimmer(bool enabled, BuildContext buildContext) =>
           children: <Widget>[
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 color: Colors.orange[500],
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15.0),
                   topRight: Radius.circular(15.0),
                 ),
@@ -192,8 +192,8 @@ Shimmer rectHorizonListShimmer(bool enabled, BuildContext buildContext) =>
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              child: Text(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+              child: const Text(
                 'Nama : ',
                 style: TextStyle(
                   color: Colors.white,
@@ -201,8 +201,8 @@ Shimmer rectHorizonListShimmer(bool enabled, BuildContext buildContext) =>
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              child: Text(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+              child: const Text(
                 'No : ',
                 style: TextStyle(
                   color: Colors.white,
@@ -210,8 +210,8 @@ Shimmer rectHorizonListShimmer(bool enabled, BuildContext buildContext) =>
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              child: Text(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+              child: const Text(
                 'Ket : ',
                 style: TextStyle(
                   color: Colors.white,
@@ -265,7 +265,7 @@ Shimmer beritaShimmer(bool enabled, BuildContext buildContext) =>
       baseColor: ColorPalete.shimmerInitColor,
       highlightColor: ColorPalete.shimmerHighlightColor,
       child: Container(
-        margin: EdgeInsets.only(right: 10.0),
+        margin: const EdgeInsets.only(right: 10.0),
         width: MediaQuery.of(buildContext).size.width * 0.6,
         decoration: BoxDecoration(
           color: ColorPalete.shimmerInitColor,
@@ -278,7 +278,7 @@ Shimmer beritaShimmer(bool enabled, BuildContext buildContext) =>
       baseColor: ColorPalete.shimmerInitColor,
       highlightColor: ColorPalete.shimmerHighlightColor,
       child: Container(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         width: double.infinity,
         height: 150.0,
         decoration: BoxDecoration(

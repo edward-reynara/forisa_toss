@@ -10,8 +10,8 @@ class DefaultDialog extends StatefulWidget {
   final bool outsideDismiss;
   final bool canPop;
 
-  DefaultDialog(this.title, this.msg, this.status, this.onPressed,
-      this.outsideDismiss, this.canPop);
+  const DefaultDialog(this.title, this.msg, this.status, this.onPressed,
+      this.outsideDismiss, this.canPop, {super.key});
   @override
   _DefaultDialogState createState() => _DefaultDialogState();
 }
@@ -40,8 +40,8 @@ class _DefaultDialogState extends State<DefaultDialog>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => widget.canPop,
+    return PopScope(
+      canPop: widget.canPop,
       child: Material(
         color: Colors.transparent,
         child: Stack(
@@ -62,7 +62,7 @@ class _DefaultDialogState extends State<DefaultDialog>
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.65,
                 height: MediaQuery.of(context).size.height * 0.45,
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10.0),
@@ -71,7 +71,7 @@ class _DefaultDialogState extends State<DefaultDialog>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: 150.0,
                       child: FlareActor(
@@ -84,7 +84,7 @@ class _DefaultDialogState extends State<DefaultDialog>
                     AutoSizeText(
                       widget.title ?? 'Response !',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20.0,
                         fontWeight: FontWeight.w600,
@@ -96,7 +96,7 @@ class _DefaultDialogState extends State<DefaultDialog>
                       child: AutoSizeText(
                         widget.msg ?? '',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black87,
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,
@@ -109,11 +109,11 @@ class _DefaultDialogState extends State<DefaultDialog>
                     Flexible(
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(StadiumBorder()),
+                          shape: MaterialStateProperty.all(const StadiumBorder()),
                           backgroundColor: MaterialStateProperty.all(Colors.green),
                         ),
                         onPressed: widget.onPressed,
-                        child: Text(
+                        child: const Text(
                           'OK',
                           style: TextStyle(
                             color: Colors.white,
