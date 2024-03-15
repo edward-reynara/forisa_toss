@@ -27,7 +27,7 @@ class StatusSummary {
       );
 
   Map<String, dynamic> toJson() => {
-        "Period": period == null ? null : period!.toJson(),
+        "Period": period?.toJson(),
         "arr_result": arrResult == null
             ? null
             : List<dynamic>.from(arrResult!.map((x) => x.toJson())),
@@ -44,13 +44,13 @@ class ArrResult {
   });
 
   factory ArrResult.fromJson(Map<String, dynamic> json) => ArrResult(
-        typeName: json["TypeName"] == null ? null : json["TypeName"],
-        qty: json["Qty"] == null ? null : json["Qty"],
+        typeName: json["TypeName"],
+        qty: json["Qty"],
       );
 
   Map<String, dynamic> toJson() => {
-        "TypeName": typeName == null ? null : typeName,
-        "Qty": qty == null ? null : qty,
+        "TypeName": typeName,
+        "Qty": qty,
       };
 }
 
