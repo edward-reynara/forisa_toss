@@ -10,7 +10,7 @@ class WebviewPage extends StatefulWidget {
   final String title;
   final String url;
 
-  WebviewPage(this.title, this.url);
+  const WebviewPage(this.title, this.url, {super.key});
 
   @override
   _WebviewPageState createState() => _WebviewPageState();
@@ -22,7 +22,7 @@ class _WebviewPageState extends State<WebviewPage> {
   @override
   void initState() {
     super.initState();
-    print(widget.url);
+    // print(widget.url);
     // Enable hybrid composition.
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }

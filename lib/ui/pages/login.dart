@@ -6,12 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:forisa_attendance/models/model_arguments.dart';
-// import 'package:forisa_attendance/models/model_default.dart';
-// import 'package:forisa_attendance/models/model_error.dart';
-// import 'package:forisa_attendance/models/model_user.dart';
-// import 'package:forisa_attendance/utils/api_service.dart';
-// import 'package:forisa_attendance/utils/tools.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../cores/models/model_arguments.dart';
@@ -22,6 +16,8 @@ import '../../cores/utils/api_service.dart';
 import '../../cores/utils/tools.dart';
 
 class Login extends StatefulWidget {
+  const Login({super.key});
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -58,11 +54,9 @@ class _LoginState extends State<Login> {
   }
 
   loginBody() => SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[loginHeader(), loginFields()],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[loginHeader(), loginFields()],
         ),
       );
 
@@ -79,108 +73,104 @@ class _LoginState extends State<Login> {
         ],
       );
 
-  loginFields() => Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              child: Text(
-                errorMessage,
-                style: TextStyle(color: Colors.red),
+  loginFields() => Column(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    mainAxisSize: MainAxisSize.min,
+    children: <Widget>[
+      Text(
+        errorMessage,
+        style: const TextStyle(color: Colors.red),
+      ),
+      Container(
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+        child: TextField(
+          controller: nikController,
+          maxLines: 1,
+          decoration: const InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
-              child: TextField(
-                controller: nikController,
-                maxLines: 1,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                    ),
-                    // hintText: "xxxxxxxx",
-                    labelText: "ID Karyawan",
-                    suffixIcon: Icon(Icons.person)),
-                // keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  // FilteringTextInputFormatter.digitsOnly,
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 0.0,
-                horizontal: 30.0,
-              ),
-              child: TextField(
-                controller: passwordController,
-                maxLines: 1,
-                obscureText: !passwordVisible,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                    ),
-                    // hintText: "Masukan Password Anda",
-                    labelText: "Password",
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          passwordVisible = !passwordVisible;
-                        });
-                      },
-                    )),
-              ),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 30.0),
-              width: double.infinity,
-              child: Builder(builder: (BuildContext context) {
-                return ElevatedButton.icon(
-                  icon: Icon(
-                    FontAwesomeIcons.signInAlt,
-                    color: Colors.white,
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.green),
-                    shape: MaterialStateProperty.all(StadiumBorder()),
-                  ),
-                  label: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      "Login",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  onPressed: () => doLogin(),
-                );
-              }),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            Text(
-              "2019 PT. Forisa Nusapersada",
-              style: TextStyle(
-                color: Colors.grey,
-              ),
-            ),
+              // hintText: "xxxxxxxx",
+              labelText: "ID Karyawan",
+              suffixIcon: Icon(Icons.person)),
+          // keyboardType: TextInputType.number,
+          inputFormatters: const <TextInputFormatter>[
+            // FilteringTextInputFormatter.digitsOnly,
           ],
         ),
-      );
+      ),
+      Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 0.0,
+          horizontal: 30.0,
+        ),
+        child: TextField(
+          controller: passwordController,
+          maxLines: 1,
+          obscureText: !passwordVisible,
+          decoration: InputDecoration(
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
+                ),
+              ),
+              // hintText: "Masukan Password Anda",
+              labelText: "Password",
+              suffixIcon: IconButton(
+                icon: Icon(
+                  passwordVisible
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                  color: Colors.grey,
+                ),
+                onPressed: () {
+                  setState(() {
+                    passwordVisible = !passwordVisible;
+                  });
+                },
+              )),
+        ),
+      ),
+      const SizedBox(
+        height: 30.0,
+      ),
+      Container(
+        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 30.0),
+        width: double.infinity,
+        child: Builder(builder: (BuildContext context) {
+          return ElevatedButton.icon(
+            icon: const Icon(
+              FontAwesomeIcons.rightToBracket,
+              color: Colors.white,
+            ),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green),
+              shape: MaterialStateProperty.all(const StadiumBorder()),
+            ),
+            label: const Padding(
+              padding: EdgeInsets.all(12.0),
+              child: Text(
+                "Login",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            onPressed: () => doLogin(),
+          );
+        }),
+      ),
+      const SizedBox(
+        height: 5.0,
+      ),
+      const Text(
+        "2019 PT. Forisa Nusapersada",
+        style: TextStyle(
+          color: Colors.grey,
+        ),
+      ),
+    ],
+  );
 
   void doLogin() {
     String nik = nikController.text;

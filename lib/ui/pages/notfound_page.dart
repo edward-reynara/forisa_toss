@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../cores/components/overlay_appbar.dart';
 
 class NotFound extends StatelessWidget {
+  const NotFound({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,7 @@ class NotFound extends StatelessWidget {
                   side: const BorderSide(color: Colors.green, width: 4.0),
                 ),
                 onPressed: () => Navigator.pop(context),
-                icon: const FaIcon(FontAwesomeIcons.arrowCircleLeft, size: 16.0,color: Colors.green,),
+                icon: const FaIcon(FontAwesomeIcons.circleArrowLeft, size: 16.0,color: Colors.green,),
                 label: const Text('Kembali', style: TextStyle(color: Colors.green),),
               ),
             ],

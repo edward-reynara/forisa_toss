@@ -2,18 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:forisa_toss/ui/pages/setting_page.dart';
-// import 'package:forisa_attendance/components/overlay_appbar.dart';
-// import 'package:forisa_attendance/config/config.dart';
-// import 'package:forisa_attendance/models/model_arguments.dart';
-// import 'package:forisa_attendance/models/model_default.dart';
-// import 'package:forisa_attendance/pages/home_page.dart';
-// import 'package:forisa_attendance/pages/idcard_page.dart';
-// import 'package:forisa_attendance/pages/profile_home_page.dart';
-// import 'package:forisa_attendance/pages/setting_page.dart';
-// import 'package:forisa_attendance/utils/api_service.dart';
-// import 'package:forisa_attendance/utils/locator.dart';
-// import 'package:forisa_attendance/utils/route_obeserver.dart';
-// import 'package:forisa_attendance/utils/tools.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../cores/components/overlay_appbar.dart';
@@ -29,7 +17,7 @@ import 'home_page.dart';
 class MainLayout extends StatefulWidget {
   final ScreenArguments screenArguments;
 
-  MainLayout(this.screenArguments);
+  const MainLayout(this.screenArguments, {super.key});
 
   @override
   _MainLayoutState createState() => _MainLayoutState();
@@ -38,7 +26,7 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> with RouteAware {
   int _selectedBottomNavIndex = 0;
   final _bottomNavPages = [];
-  ApiService apiService = new ApiService();
+  ApiService apiService = ApiService();
 
   void _onTapItem(int index) {
     setState(() {
@@ -54,7 +42,7 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
   @override
   void didPush() {
     locator<RouteObserverService>().setCurrentPage('home');
-    print('didPush' + locator<RouteObserverService>().currentPage);
+    print('didPush${locator<RouteObserverService>().currentPage}');
   }
 
   @override
@@ -64,13 +52,12 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
     print(locator<RouteObserverService>().currentPage);
     _bottomNavPages.addAll([
       Homepage(),
-      // IdCardPage(widget.screenArguments.stringData!),
       // ProfileHomePage(),
-      SettingPage(),
+      const SettingPage(),
     ]);
     //TODO: remove when prod
     if (!Config.isDebugMode) {
-      checkOneSignal();
+      // checkOneSignal();
     }
     checkPassword();
     checkContract();
@@ -96,11 +83,11 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
                 iconSize: 20.0,
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
-                    icon: Icon(FontAwesomeIcons.home),
+                    icon: Icon(FontAwesomeIcons.house),
                     label: 'Beranda',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(FontAwesomeIcons.userCircle),
+                    icon: Icon(FontAwesomeIcons.circleUser),
                     label: 'Profil',
                   ),
                   BottomNavigationBarItem(
@@ -114,7 +101,7 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
                 backgroundColor: Colors.green,
                 fixedColor: Colors.white,
                 selectedFontSize: 14.0,
-                selectedIconTheme: IconThemeData(size: 24.0),
+                selectedIconTheme: const IconThemeData(size: 24.0),
                 elevation: 4.0,
               ),
             ),
@@ -131,14 +118,14 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            title: Text(
+            title: const Text(
               'Konfirmasi',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16.0,
               ),
             ),
-            content: Text('Anda yakin akan keluar aplikasi ?'),
+            content: const Text('Anda yakin akan keluar aplikasi ?'),
             actions: <Widget>[
               ElevatedButton(
                 style: ButtonStyle(
@@ -147,7 +134,7 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
                   )),
                   backgroundColor: MaterialStateProperty.all(Colors.grey[500]),
                 ),
-                child: Text(
+                child: const Text(
                   'Tidak',
                   style: TextStyle(
                     color: Colors.white,
@@ -162,7 +149,7 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
                   )),
                   backgroundColor: MaterialStateProperty.all(Colors.green[500]),
                 ),
-                child: Text(
+                child: const Text(
                   'Ya',
                   style: TextStyle(
                     color: Colors.white,
@@ -176,14 +163,14 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
         false;
   }
 
-  Future<void> checkOneSignal() async {
-    // OSDeviceState? state = await OneSignal.shared.getDeviceState();
-    // if (state != null) {
-    //   if (!state.subscribed) {
-    //     await OneSignal.shared.disablePush(false);
-    //   }
-    // }
-  }
+  // Future<void> checkOneSignal() async {
+  //   OSDeviceState? state = await OneSignal.shared.getDeviceState();
+  //   if (state != null) {
+  //     if (!state.subscribed) {
+  //       await OneSignal.shared.disablePush(false);
+  //     }
+  //   }
+  // }
 
   void checkPassword() async {
     Dio dio = apiService.getApiClient(context: context);
@@ -243,6 +230,8 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
           canPop: false,
         );
       }
-    } catch (e) {}
+    } catch (e) {
+      //
+    }
   }
 }

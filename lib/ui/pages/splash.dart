@@ -173,7 +173,7 @@ class _SplashState extends State<Splash> with RouteAware {
                             shape: MaterialStateProperty.all(const StadiumBorder()),
                           ),
                           icon: const Icon(
-                            FontAwesomeIcons.cloudDownloadAlt,
+                            FontAwesomeIcons.cloudArrowDown,
                             color: Colors.white,
                             size: 14.0,
                           ),
@@ -237,7 +237,7 @@ class _SplashState extends State<Splash> with RouteAware {
         _appVersion = appVersion;
       });
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -252,7 +252,7 @@ class _SplashState extends State<Splash> with RouteAware {
   Future<void> goTo(String version, String url) async {
     await secureStorage.write(key: 'app_version', value: version);
     await secureStorage.write(key: 'app_url', value: url);
-    String? doneIntro = await secureStorage.read(key: 'intro');
+    // String? doneIntro = await secureStorage.read(key: 'intro');
     await initStore();
 
     // if (doneIntro == 'true') {

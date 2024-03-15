@@ -6,14 +6,16 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'login.dart';
 
 class Onboarding extends StatefulWidget {
+  const Onboarding({super.key});
+
   @override
   _OnboardingState createState() => _OnboardingState();
 }
 
 class _OnboardingState extends State<Onboarding> {
   PageDecoration pageDecoration({Color? pageColor}) => PageDecoration(
-        titleTextStyle: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
-        bodyTextStyle: TextStyle(fontSize: 16.0),
+        titleTextStyle: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
+        bodyTextStyle: const TextStyle(fontSize: 16.0),
         //descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
         pageColor: pageColor ?? Colors.white,
         imagePadding: EdgeInsets.zero,
@@ -22,12 +24,12 @@ class _OnboardingState extends State<Onboarding> {
         bodyFlex: 1,
       );
   List<PageViewModel> onboardingList = [];
-  final FlutterSecureStorage secureStorage = FlutterSecureStorage();
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   @override
   void initState() {
     super.initState();
-    this.onboardingList = [
+    onboardingList = [
     PageViewModel(
       image: Image.asset('assets/images/logo.png'),
       title: 'Hi,',
@@ -54,21 +56,21 @@ class _OnboardingState extends State<Onboarding> {
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
-      pages: this.onboardingList,
+      pages: onboardingList,
       onDone: () => doneOnboarding(context),
       done: btnOnboarding(title: 'Mulai'),
       showSkipButton: true,
       showNextButton: true,
-      skip: Text('Lewati', style: TextStyle(
+      skip: const Text('Lewati', style: TextStyle(
         fontWeight: FontWeight.bold
       ),),
       next: btnOnboarding(title: 'Lanjut'),
       dotsDecorator: DotsDecorator(
-        size: Size.square(10.0),
-        activeSize: Size(20.0, 10.0),
+        size: const Size.square(10.0),
+        activeSize: const Size(20.0, 10.0),
         activeColor: Colors.green,
         color: Colors.grey,
-        spacing: EdgeInsets.symmetric(horizontal: 3.0),
+        spacing: const EdgeInsets.symmetric(horizontal: 3.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
         ),
@@ -89,9 +91,9 @@ class _OnboardingState extends State<Onboarding> {
   }
 
   Widget btnOnboarding({required String title}) => Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
         gradient: LinearGradient(colors: <Color>[
           Colors.green,
           Colors.green[300]!,
@@ -99,7 +101,7 @@ class _OnboardingState extends State<Onboarding> {
       ),
       child: Text(
         title,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
     );
 }

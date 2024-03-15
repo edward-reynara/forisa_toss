@@ -3,15 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:forisa_toss/ui/pages/webview_page.dart';
-// import 'package:forisa_attendance/components/error_future_component.dart';
-// import 'package:forisa_attendance/components/overlay_appbar.dart';
-// import 'package:forisa_attendance/components/shimmers.dart';
-// import 'package:forisa_attendance/components/submit_button.dart';
-// import 'package:forisa_attendance/config/config.dart';
-// import 'package:forisa_attendance/models/model_arguments.dart';
-// import 'package:forisa_attendance/pages/webview_page.dart';
-// import 'package:forisa_attendance/utils/constants.dart';
-// import 'package:forisa_attendance/utils/tools.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../cores/components/error_future_component.dart';
@@ -24,6 +15,8 @@ import '../../cores/utils/constants.dart';
 import '../../cores/utils/tools.dart';
 
 class SettingPage extends StatefulWidget {
+  const SettingPage({super.key});
+
   @override
   _SettingPageState createState() => _SettingPageState();
 }
@@ -76,7 +69,7 @@ class _SettingPageState extends State<SettingPage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       child: Column(
                         children: [
@@ -85,7 +78,7 @@ class _SettingPageState extends State<SettingPage> {
                                 '/changepassword',
                                 arguments: ScreenArguments(
                                     titleMenu: 'Ganti Password')),
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Row(
@@ -115,7 +108,7 @@ class _SettingPageState extends State<SettingPage> {
                     // Data perangkat
                     Container(
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       child: Text(
                         'Perangkat',
@@ -128,19 +121,19 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     Container(
                       color: Colors.white,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       child: Column(
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Row(
+                              const Row(
                                 children: <Widget>[
                                   Text('Model'),
                                 ],
                               ),
-                              Text(this.deviceInfo?[0] ?? '-'),
+                              Text(deviceInfo?[0] ?? '-'),
                             ],
                           ),
                           Divider(
@@ -151,12 +144,12 @@ class _SettingPageState extends State<SettingPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Row(
+                              const Row(
                                 children: <Widget>[
                                   Text('Sistem Operasi'),
                                 ],
                               ),
-                              Text(this.deviceInfo?[1] ?? '-'),
+                              Text(deviceInfo?[1] ?? '-'),
                             ],
                           ),
                           Divider(
@@ -167,12 +160,12 @@ class _SettingPageState extends State<SettingPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Row(
+                              const Row(
                                 children: <Widget>[
                                   Text('Id Perangkat'),
                                 ],
                               ),
-                              Text(this.deviceInfo?[2] ?? '-'),
+                              Text(deviceInfo?[2] ?? '-'),
                             ],
                           ),
                           Divider(
@@ -187,7 +180,7 @@ class _SettingPageState extends State<SettingPage> {
                               // ApiService.getCacheManager().clearAll().then(
                               //     (value) => );
                             },
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Row(
@@ -208,7 +201,7 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       child: Text(
                         'Tentang',
@@ -221,14 +214,14 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     Container(
                       color: Colors.white,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       child: Column(
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Row(
+                              const Row(
                                 children: <Widget>[
                                   Icon(
                                     FontAwesomeIcons.code,
@@ -252,14 +245,14 @@ class _SettingPageState extends State<SettingPage> {
                           GestureDetector(
                             onTap: () =>
                                 Navigator.of(context).push(CupertinoPageRoute(
-                              builder: (context) => WebviewPage(
+                              builder: (context) => const WebviewPage(
                                 'Panduan Penggunaan',
-                                Config.webUrl + '/panduan',
+                                '${Config.webUrl}/panduan',
                               ),
                             )),
                             child: Container(
                               color: Colors.white,
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
@@ -293,21 +286,21 @@ class _SettingPageState extends State<SettingPage> {
                           GestureDetector(
                             onTap: () =>
                                 Navigator.of(context).push(CupertinoPageRoute(
-                              builder: (context) => WebviewPage(
+                              builder: (context) => const WebviewPage(
                                 'Kebijakan Privasi',
-                                Config.webUrl + '/kebijakan-privasi',
+                                '${Config.webUrl}/kebijakan-privasi',
                               ),
                             )),
                             child: Container(
                               color: Colors.white,
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
                                       Icon(
-                                        FontAwesomeIcons.shieldAlt,
+                                        FontAwesomeIcons.shieldHalved,
                                         color: Colors.green,
                                         size: 20.0,
                                       ),
@@ -334,21 +327,21 @@ class _SettingPageState extends State<SettingPage> {
                           GestureDetector(
                             onTap: () =>
                                 Navigator.of(context).push(CupertinoPageRoute(
-                              builder: (context) => WebviewPage(
+                              builder: (context) => const WebviewPage(
                                 'Pusat Bantuan',
-                                Config.webUrl + '/pusat-bantuan',
+                                '${Config.webUrl}/pusat-bantuan',
                               ),
                             )),
                             child: Container(
                               color: Colors.white,
-                              child: Row(
+                              child: const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
                                       Icon(
-                                        FontAwesomeIcons.questionCircle,
+                                        FontAwesomeIcons.circleQuestion,
                                         color: Colors.green,
                                         size: 20.0,
                                       ),
@@ -373,7 +366,7 @@ class _SettingPageState extends State<SettingPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: buttonCompact(
-                        iconData: FontAwesomeIcons.signOutAlt,
+                        iconData: FontAwesomeIcons.rightFromBracket,
                         onPressed: () {
                           Tools.logoutApp(context: context);
                         },
