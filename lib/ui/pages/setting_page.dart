@@ -38,7 +38,7 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: defaultAppBar(title: 'Pengaturan'),
+      appBar: defaultAppBar(title: 'Setting'),
       backgroundColor: Colors.white,
       body: FutureBuilder(
           future: _future,
@@ -55,56 +55,57 @@ class _SettingPageState extends State<SettingPage> {
                 padding: const EdgeInsets.only(bottom: constBottomNavbarPadding),
                 child: Column(
                   children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
-                      child: Text(
-                        'Akun',
-                        style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () => Navigator.of(context).pushNamed(
-                                '/changepassword',
-                                arguments: ScreenArguments(
-                                    titleMenu: 'Ganti Password')),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      FontAwesomeIcons.lock,
-                                      color: Colors.green,
-                                      size: 20.0,
-                                    ),
-                                    SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    Text('Ganti Password'),
-                                  ],
-                                ),
-                                Icon(
-                                  FontAwesomeIcons.arrowRight,
-                                  color: Colors.grey,
-                                  size: 14.0,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Akun
+                    // Container(
+                    //   alignment: Alignment.centerLeft,
+                    //   padding: const EdgeInsets.symmetric(
+                    //       horizontal: 20.0, vertical: 10.0),
+                    //   child: Text(
+                    //     'Akun',
+                    //     style: TextStyle(
+                    //       color: Colors.grey[800],
+                    //       fontSize: 20.0,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    // ),
+                    // Container(
+                    //   padding: const EdgeInsets.symmetric(
+                    //       horizontal: 20.0, vertical: 10.0),
+                    //   child: Column(
+                    //     children: [
+                    //       GestureDetector(
+                    //         onTap: () => Navigator.of(context).pushNamed(
+                    //             '/changepassword',
+                    //             arguments: ScreenArguments(
+                    //                 titleMenu: 'Ganti Password')),
+                    //         child: const Row(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //           children: <Widget>[
+                    //             Row(
+                    //               children: <Widget>[
+                    //                 Icon(
+                    //                   FontAwesomeIcons.lock,
+                    //                   color: Colors.green,
+                    //                   size: 20.0,
+                    //                 ),
+                    //                 SizedBox(
+                    //                   width: 10.0,
+                    //                 ),
+                    //                 Text('Ganti Password'),
+                    //               ],
+                    //             ),
+                    //             Icon(
+                    //               FontAwesomeIcons.arrowRight,
+                    //               color: Colors.grey,
+                    //               size: 14.0,
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     // Data perangkat
                     Container(
                       alignment: Alignment.centerLeft,

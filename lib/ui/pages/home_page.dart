@@ -29,6 +29,8 @@ import '../../cores/utils/tools.dart';
 import 'login.dart';
 
 class Homepage extends StatefulWidget {
+  const Homepage({super.key});
+
   @override
   _HomeState createState() => _HomeState();
 }

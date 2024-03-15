@@ -6,6 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../cores/components/error_future_component.dart';
+import '../../cores/components/overlay_appbar.dart';
 import '../../cores/components/shimmers.dart';
 import '../../cores/configs/config.dart';
 import '../../cores/models/model_arguments.dart';
@@ -45,6 +46,7 @@ class _ProfileHomePageState extends State<ProfileHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: defaultAppBar(title: 'Profile'),
       backgroundColor: Colors.white,
       body: FutureBuilder(
         future: _futureProfile,
@@ -59,33 +61,11 @@ class _ProfileHomePageState extends State<ProfileHomePage> {
                     alignment: Alignment.centerLeft,
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    child: Text(
-                      'Data Karyawan',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                   Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                     child: fullWidthColShimmer(true),
-                  ),
-                  //Data Asuransi
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    child: Text(
-                      'Data Asuransi',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                   Container(
                     margin: const EdgeInsets.only(bottom: 10.0),
@@ -118,14 +98,6 @@ class _ProfileHomePageState extends State<ProfileHomePage> {
                     alignment: Alignment.centerLeft,
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    child: Text(
-                      'Data Karyawan',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                   Container(
                     padding:
@@ -286,149 +258,10 @@ class _ProfileHomePageState extends State<ProfileHomePage> {
                           thickness: 2.0,
                           color: Colors.grey.withOpacity(0.3),
                         ),
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pushNamed(
-                              '/leavedetail',
-                              arguments:
-                                  ScreenArguments(titleMenu: 'Sisa Cuti')),
-                          child: Container(
-                            color: Colors.white,
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        FontAwesomeIcons.circleInfo,
-                                        color: Colors.green,
-                                        size: 20.0,
-                                      ),
-                                      SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Text('Sisa Cuti'),
-                                    ],
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text('Lihat'),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Icon(
-                                      FontAwesomeIcons.arrowRight,
-                                      color: Colors.grey,
-                                      size: 14.0,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Divider(
-                          height: 20.0,
-                          thickness: 2.0,
-                          color: Colors.grey.withOpacity(0.3),
-                        ),
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pushNamed(
-                              '/coverage_area',
-                              arguments:
-                                  ScreenArguments(titleMenu: 'POH / Work Location')),
-                          child: Container(
-                            color: Colors.white,
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        FontAwesomeIcons.locationPin,
-                                        color: Colors.green,
-                                        size: 20.0,
-                                      ),
-                                      SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Text('POH / Work Location'),
-                                    ],
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text('Lihat'),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Icon(
-                                      FontAwesomeIcons.arrowRight,
-                                      color: Colors.grey,
-                                      size: 14.0,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Divider(
-                          height: 20.0,
-                          thickness: 2.0,
-                          color: Colors.grey.withOpacity(0.3),
-                        ),
                       ],
                     ),
                   ),
-                  //Data Asuransi
                   Container(
-                    alignment: Alignment.centerLeft,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    child: Text(
-                      'Data Asuransi',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  if (profile!.insuranceData.isEmpty)
-                    Container(
-                      margin: const EdgeInsets.only(
-                          left: 20.0, bottom: 10.0, right: 20.0),
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.green[500],
-                        gradient: LinearGradient(
-                          colors: [Colors.orange[400]!, Colors.red[400]!],
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(FontAwesomeIcons.ban, color: Colors.white),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Text(
-                            'Data Asuransi belum ada',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    )
-                  else
-                    Container(
                       margin: const EdgeInsets.only(
                           left: 20.0, bottom: 10.0, right: 20.0),
                       child: GridView.count(

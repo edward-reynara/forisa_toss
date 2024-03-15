@@ -52,8 +52,8 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
     locator<RouteObserverService>().setCurrentPage('home');
     print(locator<RouteObserverService>().currentPage);
     _bottomNavPages.addAll([
-      Homepage(),
-      ProfileHomePage(),
+      const Homepage(),
+      const ProfileHomePage(),
       const SettingPage(),
     ]);
     //TODO: remove when prod
@@ -69,7 +69,7 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
-        appBar: [1, 3].contains(_selectedBottomNavIndex)
+        appBar: [1,2].contains(_selectedBottomNavIndex)
             ? null
             : overlayAppBar(context),
         body: _bottomNavPages.elementAt(_selectedBottomNavIndex),
@@ -85,15 +85,15 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(FontAwesomeIcons.house),
-                    label: 'Beranda',
+                    label: 'Home',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(FontAwesomeIcons.circleUser),
-                    label: 'Profil',
+                    label: 'Profile',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(FontAwesomeIcons.wrench),
-                    label: 'Pengaturan',
+                    label: 'Setting',
                   ),
                 ],
                 type: BottomNavigationBarType.fixed,
