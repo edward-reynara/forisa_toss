@@ -64,7 +64,7 @@ class Tools {
       title: title,
       message: msg,
       isDismissible: true,
-      duration: duration ?? Duration(seconds: 3),
+      duration: duration ?? const Duration(seconds: 3),
       borderRadius: BorderRadius.circular(5.0),
       // margin: EdgeInsets.all(5.0),
       flushbarStyle: FlushbarStyle.FLOATING,
@@ -72,10 +72,10 @@ class Tools {
       boxShadows: [
         BoxShadow(
             color: Colors.grey.shade800,
-            offset: Offset(0.0, 2.0),
+            offset: const Offset(0.0, 2.0),
             blurRadius: 3.0)
       ],
-      icon: Icon(
+      icon: const Icon(
         Icons.notifications,
         color: Colors.white,
       ),
@@ -86,7 +86,7 @@ class Tools {
               : Colors.green,
       shouldIconPulse: false,
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-    )..show(context);
+    ).show(context);
   }
 
   // static Future<bool> checkMockLocation() async {
@@ -105,9 +105,9 @@ class Tools {
     try {
       if (Platform.isAndroid) {
         var build = await deviceInfoPlugin.androidInfo;
-        deviceName = build.model ?? '-';
+        deviceName = build.model;
         deviceVersion =
-            '${Platform.operatingSystem} ${build.version.release ?? '-'}';
+            '${Platform.operatingSystem} ${build.version.release}';
         // deviceID = build.androidId ?? '-';
         const androidIdPlugin = AndroidId();
         try {
@@ -120,8 +120,8 @@ class Tools {
         }
       } else if (Platform.isIOS) {
         var data = await deviceInfoPlugin.iosInfo;
-        deviceName = data.name ?? '-';
-        deviceVersion = data.systemName ?? '-';
+        deviceName = data.name;
+        deviceVersion = data.systemName;
         deviceID = data.identifierForVendor ?? '-';
       }
     } on PlatformException catch (e) {
@@ -179,7 +179,7 @@ class Tools {
       return 'InvalidNum';
     }
     Intl.defaultLocale = 'id_ID';
-    final formater = new NumberFormat("###,###.###");
+    final formater = NumberFormat("###,###.###");
     return formater.format(number);
   }
 
@@ -210,14 +210,14 @@ class Tools {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            title: Text(
+            title: const Text(
               'Konfirmasi',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16.0,
               ),
             ),
-            content: Text('Anda yakin akan logout ?'),
+            content: const Text('Anda yakin akan logout ?'),
             actions: <Widget>[
               ElevatedButton(
                 style: ButtonStyle(
@@ -226,7 +226,7 @@ class Tools {
                   )),
                   backgroundColor: MaterialStateProperty.all(Colors.grey[500]),
                 ),
-                child: Text(
+                child: const Text(
                   'Tidak',
                   style: TextStyle(
                     color: Colors.white,
@@ -243,7 +243,7 @@ class Tools {
                     )),
                     backgroundColor:
                         MaterialStateProperty.all(Colors.green[500])),
-                child: Text(
+                child: const Text(
                   'Ya',
                   style: TextStyle(
                     color: Colors.white,
@@ -272,7 +272,7 @@ class Tools {
     bool grantedPermissions = true;
     var build = await device_info.DeviceInfoPlugin().androidInfo;
     if (Platform.isAndroid) {
-      if (build.version.sdkInt! < 23) {
+      if (build.version.sdkInt < 23) {
         return grantedPermissions;
       }
     }
@@ -288,7 +288,7 @@ class Tools {
       permissionsRequest.add(p_handler.Permission.camera);
     }
 
-    if (build.version.sdkInt! > 32) {
+    if (build.version.sdkInt > 32) {
       //for android >= 33
       bool photosPermission = await p_handler.Permission.photos.isGranted;
       bool videosPermission = await p_handler.Permission.videos.isGranted;
@@ -351,14 +351,14 @@ class Tools {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        title: Text(
+        title: const Text(
           'Konfirmasi',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16.0,
           ),
         ),
-        content: Text('Anda yakin akan keluar aplikasi ?'),
+        content: const Text('Anda yakin akan keluar aplikasi ?'),
         actions: <Widget>[
           ElevatedButton(
             style: ButtonStyle(
@@ -369,7 +369,7 @@ class Tools {
               ),
               backgroundColor: MaterialStateProperty.all(Colors.grey[500]),
             ),
-            child: Text(
+            child: const Text(
               'Tidak',
               style: TextStyle(
                 color: Colors.white,
@@ -386,7 +386,7 @@ class Tools {
               ),
               backgroundColor: MaterialStateProperty.all(Colors.green[500]),
             ),
-            child: Text(
+            child: const Text(
               'Ya',
               style: TextStyle(
                 color: Colors.white,
@@ -426,7 +426,6 @@ class Tools {
     // if (value.length >= 4) {
     //   return value.substring(0, value.indexOf('.')+3);
     // }
-
     return value;
   }
 
@@ -437,7 +436,7 @@ class Tools {
         Tools.showAlert(
             context, 'Response', errorResponse.message.join('\n'), 'error');
       } else if (e.response?.statusCode == 401) {
-        FlutterSecureStorage secureStorage = FlutterSecureStorage();
+        FlutterSecureStorage secureStorage = const FlutterSecureStorage();
         secureStorage.deleteAll();
         secureStorage.write(key: 'intro', value: 'true');
         showDialog(
@@ -445,11 +444,11 @@ class Tools {
             barrierDismissible: false,
             builder: (dialogContext) {
               return AlertDialog(
-                title: Text('Perhatian'),
-                content: Text('Sesi anda telah habis silahkan login kembali'),
+                title: const Text('Perhatian'),
+                content: const Text('Sesi anda telah habis silahkan login kembali'),
                 actions: <Widget>[
                   OutlinedButton(
-                    child: Text('OK'),
+                    child: const Text('OK'),
                     onPressed: () {
                       Navigator.pop(dialogContext);
                       Navigator.of(context).pushAndRemoveUntil(
@@ -473,12 +472,12 @@ class Tools {
   }
 
   static String randomString(int length) {
-    const _chars =
+    const chars =
         'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    Random _rnd = Random();
+    Random rnd = Random();
 
     return String.fromCharCodes(Iterable.generate(
-        length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+        length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
   }
 
   static Future<String?> getDownloadDirectory() async {
@@ -493,7 +492,7 @@ class Tools {
       }
     } else {
       dir = await getApplicationDocumentsDirectory();
-      path = '${dir.path}';
+      path = dir.path;
     }
     return path;
   }
@@ -502,19 +501,18 @@ class Tools {
     Directory dir;
     String? path;
     dir = await getTemporaryDirectory();
-    path = '${dir.path}';
+    path = dir.path;
     return path;
   }
 
   static String numberToRupiahResult(double number) {
     var result = numberToRupiah(number);
-    return result
+    return "${result
             .trim()
             .split(' ')
             .map((e) => '${e[0].toUpperCase()}${e.substring(1).toLowerCase()}')
             .toList()
-            .join(' ') +
-        " Rupiah";
+            .join(' ')} Rupiah";
   }
 
   static String numberToRupiah(double number) {
@@ -535,36 +533,26 @@ class Tools {
     ];
     var temp = '';
     if (number < 12) {
-      temp = " " + numberInINA[number.toInt()];
+      temp = " ${numberInINA[number.toInt()]}";
     } else if (number < 20) {
-      temp = numberToRupiah(number - 10) + " belas";
+      temp = "${numberToRupiah(number - 10)} belas";
     } else if (number < 100) {
       temp =
-          numberToRupiah(number / 10) + " puluh" + numberToRupiah(number % 10);
+          "${numberToRupiah(number / 10)} puluh${numberToRupiah(number % 10)}";
     } else if (number < 200) {
-      temp = " seratus" + numberToRupiah(number - 100);
+      temp = " seratus${numberToRupiah(number - 100)}";
     } else if (number < 1000) {
-      temp = numberToRupiah(number / 100) +
-          " ratus" +
-          numberToRupiah(number % 100);
+      temp = "${numberToRupiah(number / 100)} ratus${numberToRupiah(number % 100)}";
     } else if (number < 2000) {
-      temp = " seribu" + numberToRupiah(number - 1000);
+      temp = " seribu${numberToRupiah(number - 1000)}";
     } else if (number < 1000000) {
-      temp = numberToRupiah(number / 1000) +
-          " ribu" +
-          numberToRupiah(number % 1000);
+      temp = "${numberToRupiah(number / 1000)} ribu${numberToRupiah(number % 1000)}";
     } else if (number < 1000000000) {
-      temp = numberToRupiah(number / 1000000) +
-          " juta" +
-          numberToRupiah(number % 1000000);
+      temp = "${numberToRupiah(number / 1000000)} juta${numberToRupiah(number % 1000000)}";
     } else if (number < 1000000000000) {
-      temp = numberToRupiah(number / 1000000000) +
-          " milyar" +
-          numberToRupiah(number % 1000000000);
+      temp = "${numberToRupiah(number / 1000000000)} milyar${numberToRupiah(number % 1000000000)}";
     } else if (number < 1000000000000000) {
-      temp = numberToRupiah(number / 1000000000000) +
-          " trilyun" +
-          numberToRupiah(number % 1000000000000);
+      temp = "${numberToRupiah(number / 1000000000000)} trilyun${numberToRupiah(number % 1000000000000)}";
     }
     return temp.trimRight();
   }
@@ -582,7 +570,7 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
     // Short-circuit if the new value is empty
-    if (newValue.text.length == 0) {
+    if (newValue.text.isEmpty) {
       return newValue.copyWith(text: '');
     }
 
@@ -603,8 +591,9 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
 
       String newString = '';
       for (int i = chars.length - 1; i >= 0; i--) {
-        if ((chars.length - 1 - i) % 3 == 0 && i != chars.length - 1)
+        if ((chars.length - 1 - i) % 3 == 0 && i != chars.length - 1) {
           newString = separator + newString;
+        }
         newString = chars[i] + newString;
       }
 
