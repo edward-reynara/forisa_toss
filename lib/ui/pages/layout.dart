@@ -74,42 +74,42 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
             : overlayAppBar(context),
         body: _bottomNavPages.elementAt(_selectedBottomNavIndex),
         extendBody: true,
-        bottomNavigationBar: Container(
-          color: Colors.transparent,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(32.0),
-              child: BottomNavigationBar(
-                iconSize: 20.0,
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(FontAwesomeIcons.house),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(FontAwesomeIcons.circleUser),
-                    label: 'Profile',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(FontAwesomeIcons.wrench),
-                    label: 'Setting',
-                  ),
-                ],
-                type: BottomNavigationBarType.fixed,
-                currentIndex: _selectedBottomNavIndex,
-                onTap: _onTapItem,
-                backgroundColor: Colors.green,
-                fixedColor: Colors.white,
-                selectedFontSize: 14.0,
-                selectedIconTheme: const IconThemeData(size: 24.0),
-                elevation: 4.0,
-              ),
+        bottomNavigationBar:
+        Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(width: 3.0, color: Colors.grey),
             ),
           ),
-        ),
+          child: BottomNavigationBar(
+            iconSize: 20.0,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.house),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.userLarge),
+                label: 'Profile',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.wrench),
+                label: 'Setting',
+              ),
+            ],
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _selectedBottomNavIndex,
+            onTap: _onTapItem,
+            backgroundColor: Colors.white,
+            // fixedColor: Colors.green,
+            selectedFontSize: 16.0,
+            selectedIconTheme: const IconThemeData(size: 26.0),
+            selectedItemColor: Colors.green,
+            elevation: 4.0,
+          ),
+        )
       ),
-    );
+          );
   }
 
   Future<bool> _onWillPop() async {
