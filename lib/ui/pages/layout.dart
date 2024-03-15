@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:forisa_toss/ui/pages/profile_home_page.dart';
 import 'package:forisa_toss/ui/pages/setting_page.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -52,7 +53,7 @@ class _MainLayoutState extends State<MainLayout> with RouteAware {
     print(locator<RouteObserverService>().currentPage);
     _bottomNavPages.addAll([
       Homepage(),
-      // ProfileHomePage(),
+      ProfileHomePage(),
       const SettingPage(),
     ]);
     //TODO: remove when prod
