@@ -21,6 +21,7 @@ Container errorFutureContainer({
   try {
     stackTrace = error.stackTrace.toString();
   } catch (e) {
+    //
   }
 
   if (error is DioException) {
@@ -37,7 +38,7 @@ Container errorFutureContainer({
         title = 'Sesi Habis';
         desc = 'Silahkan login kembali.';
         btnString = 'Login';
-        iconData = FontAwesomeIcons.signInAlt;
+        iconData = FontAwesomeIcons.rightToBracket;
         callback = () {
           Navigator.of(context).pushAndRemoveUntil(
             CupertinoPageRoute(
@@ -50,7 +51,7 @@ Container errorFutureContainer({
         title = 'Not Found';
         desc = 'Halaman tidak ditemukan.';
         btnString = 'Kembali';
-        iconData = FontAwesomeIcons.arrowCircleLeft;
+        iconData = FontAwesomeIcons.circleArrowLeft;
         callback = callback ?? () {
           Navigator.of(context).pop();
         };
@@ -123,7 +124,7 @@ Container errorFutureContainer({
                 ? Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: buttonIconContainer(
-                      iconData: iconData ?? FontAwesomeIcons.redo,
+                      iconData: iconData ?? FontAwesomeIcons.arrowRotateRight,
                       onPressed: callback,
                       text: btnString ?? 'Ulangi',
                       buttonColor: Colors.green,
