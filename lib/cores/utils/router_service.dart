@@ -13,7 +13,7 @@ import '../models/model_arguments.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(builder: (context) => Splash());
+      return MaterialPageRoute(builder: (context) => const Splash());
     case '/login':
       return MaterialPageRoute(builder: (context) => Login());
     case '/onboarding':

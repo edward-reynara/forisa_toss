@@ -10,8 +10,8 @@ class APIRoute {
   static const userBoardVendor = '/user/board_vendor_list';
 
   //Place Autocomplete
-  static const MAPS_PLACE_URL = "/master/google/google_placeautocomp";
-  static const MAPS_PLACE_DETAILS_URL = "/master/google/google_placedetail";
+  static const mapsPlaceUrl = "/master/google/google_placeautocomp";
+  static const mapsPlaceDetailsUrl = "/master/google/google_placedetail";
 }
 
 class IMG {
