@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MenuItem {
+class Menu {
   String title;
   Image image;
 
-  MenuItem({
+  Menu({
     required this.title,
     required this.image,
   });

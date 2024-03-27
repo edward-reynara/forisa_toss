@@ -43,7 +43,7 @@ AppBar overlayAppBar(BuildContext context) {
         margin: const EdgeInsets.only(right: 20.0),
         alignment: Alignment.bottomCenter,
         child: const Text(
-          !Config.isDebugMode ? 'Absensi' : 'Absensi DEV',
+          !Config.isDebugMode ? 'TOSS' : 'TOSS DEV',
           style: TextStyle(
             color: Colors.black,
             fontSize: 20.0,

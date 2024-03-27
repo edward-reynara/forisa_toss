@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:forisa_toss/cores/models/model_menu.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -74,27 +73,10 @@ class _HomeState extends State<Homepage> {
     _loadIdentity();
     //TODO: remove when prod
     if (Config.onesignalService == true) {
-      updateOsPlayerId();
+      // updateOsPlayerId();
     }
     // _loadUnread();
     _checkVersion();
-  }
-
-  Future<void> updateOsPlayerId() async {
-    // OSDeviceState? status = await OneSignal.shared.getDeviceState();
-    // String? playerId = status?.userId;
-    // print('playerid = $playerId');
-    // ApiService _apiService = ApiService();
-    // Dio dio = _apiService.getApiClient(context: context);
-    // Response response;
-    //
-    // try {
-    //   response = await dio
-    //       .post('/user/submitosplayerid', data: {'PlayerId': playerId});
-    //   print(response.data);
-    // } on DioException catch (e) {
-    //   print(e.message);
-    // }
   }
 
   @override
@@ -153,105 +135,9 @@ class _HomeState extends State<Homepage> {
                     children: <Widget>[
                       if (updateAvailable) _updateAvailableWidget(),
                       _ProfileWidget(name: name, nik: nik, inboxUnread: inboxUnread),
-                      //Menu Utama
-                      MenuUtama(
-                        parentContext: context,
-                        future: _futureMenu,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        width: double.infinity,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: FutureBuilder(
-                            future: _futureStatusSummary,
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return statusSummaryShimmer(true, context);
-                              }
-
-                              if (!snapshot.hasError) {
-                                _statusSummary =
-                                    snapshot.data;
-                                if (_statusSummary == null) {
-                                  return const Card(
-                                    child: Center(
-                                      child: Text(
-                                          'Data Ringkasan tidak ditemukan'),
-                                    ),
-                                  );
-                                }
-                                return Card(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.vertical(
-                                              top: Radius.circular(5.0)),
-                                          color: Colors.orange[500],
-                                        ),
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'Ringkasan\nPeriode ${Tools.formatIdDate('dd MMM yyyy', _statusSummary!.period!.startDate)} - ${Tools.formatIdDate('dd MMM yyyy', _statusSummary!.period!.endDate)}',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.0,
-                                          ),
-                                        ),
-                                      ),
-                                      // Container(
-                                      //   width: double.infinity,
-                                      //   color: Colors.white,
-                                      //   child:
-                                      //       summaryDataTable(_statusSummary!),
-                                      // ),
-                                    ],
-                                  ),
-                                );
-                              } else {
-                                return Center(
-                                  child: Text(snapshot.error.toString()),
-                                );
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            const Text(
-                              'Berita Terbaru',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            GestureDetector(
-                              // onTap: () => Navigator.push(
-                              //   // context,
-                              //   // CupertinoPageRoute(
-                              //   //   builder: (context) => MessageTabPage(
-                              //   //       ScreenArguments(
-                              //   //           titleMenu: 'Berita',
-                              //   //           initialIndex: 1)),
-                              //   // ),
-                              // ),
-                              child: const Text('Lihat Semua'),
-                            ),
-                          ],
-                        ),
                       ),
                       FutureBuilder(
                           future: _futureBerita,
@@ -377,6 +263,14 @@ class _HomeState extends State<Homepage> {
                               );
                             }
                           }),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 20.0),
+                      ),
+                      MenuUtama(
+                        parentContext: context,
+                        future: _futureMenu,
+                      ),
                     ],
                   ),
                 ),
@@ -453,13 +347,6 @@ class _HomeState extends State<Homepage> {
   }
 
   Future _getMenus() async {
-    // MenuItem checkMenuItem = locator<CacheModel>().menuUtama;
-    // if (checkMenuItem != null) {
-    //   setState(() {
-    //     menuItems = checkMenuItem.mainmenu;
-    //   });
-    //   return;
-    // }
     Dio dio = _apiService.getApiClient(context: context);
     Response response;
 
@@ -467,8 +354,8 @@ class _HomeState extends State<Homepage> {
       response = await dio.get('/getmenu');
       var menuItem = menu_item_model.MenuItem.fromJson(response.data);
       setState(() {
-        menuItems = menuItem.mainmenu;
-        locator<CacheModel>().menuUtama = menuItem as MenuItem;
+        menuItems = menuItem.mainMenu;
+        locator<CacheModel>().mainMenuCache = menuItem;
       });
     } on DioException catch (e) {
       if (e.response != null) {

@@ -1,9 +1,9 @@
-import '../models/model_menu.dart';
+import '../models/model_menu_item.dart';
 
 class CacheModel {
   late MenuItem _menuItem;
 
-  MenuItem get menuUtama => _menuItem;
+  MenuItem get mainMenuCache => _menuItem;
 
-  set menuUtama(MenuItem menuItem) => _menuItem = menuItem;
+  set mainMenuCache(MenuItem menuItem) => _menuItem = menuItem;
 }

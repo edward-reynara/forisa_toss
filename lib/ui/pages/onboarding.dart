@@ -34,7 +34,7 @@ class _OnboardingState extends State<Onboarding> {
       image: Image.asset('assets/images/logo.png'),
       title: 'Hi,',
       body:
-          'Terima kasih telah menginstall aplikasi absensi karyawan PT. Forisa Nusapersada',
+          'Terima kasih telah menginstall aplikasi TOSS PT. Forisa Nusapersada',
       decoration: pageDecoration()
     ),
     PageViewModel(

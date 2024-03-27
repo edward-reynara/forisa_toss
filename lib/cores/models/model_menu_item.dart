@@ -9,25 +9,25 @@ MenuItem menuItemFromJson(String str) => MenuItem.fromJson(json.decode(str));
 String menuItemToJson(MenuItem data) => json.encode(data.toJson());
 
 class MenuItem {
-  List<Menu> mainmenu;
-  List<Menu> footermenu;
+  List<Menu> mainMenu;
+  List<Menu> footerMenu;
 
   MenuItem({
-    required this.mainmenu,
-    required this.footermenu,
+    required this.mainMenu,
+    required this.footerMenu,
   });
 
   factory MenuItem.fromJson(Map<String, dynamic> json) => MenuItem(
-        mainmenu:
-            List<Menu>.from(json["mainmenu"].map((x) => Menu.fromJson(x))),
-        footermenu:
-            List<Menu>.from(json["footermenu"].map((x) => Menu.fromJson(x))),
-      );
+    mainMenu:
+    List<Menu>.from(json["mainmenu"].map((x) => Menu.fromJson(x))),
+    footerMenu:
+    List<Menu>.from(json["footermenu"].map((x) => Menu.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "mainmenu": List<dynamic>.from(mainmenu.map((x) => x.toJson())),
-        "footermenu": List<dynamic>.from(footermenu.map((x) => x.toJson())),
-      };
+    "mainmenu": List<dynamic>.from(mainMenu.map((x) => x.toJson())),
+    "footermenu": List<dynamic>.from(mainMenu.map((x) => x.toJson())),
+  };
 }
 
 class Menu {
@@ -44,16 +44,16 @@ class Menu {
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) => Menu(
-        menuId: json["MenuId"],
-        menuDisplayName: json["MenuDisplayName"],
-        link: json["Link"],
-        icon: json["Icon"],
-      );
+    menuId: json["MenuId"],
+    menuDisplayName: json["MenuDisplayName"],
+    link: json["Link"],
+    icon: json["Icon"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "MenuId": menuId,
-        "MenuDisplayName": menuDisplayName,
-        "Link": link,
-        "Icon": icon,
-      };
+    "MenuId": menuId,
+    "MenuDisplayName": menuDisplayName,
+    "Link": link,
+    "Icon": icon,
+  };
 }
