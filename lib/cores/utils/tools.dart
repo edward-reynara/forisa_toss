@@ -429,7 +429,7 @@ class Tools {
     return value;
   }
 
-  static handleAPIError(DioException e, BuildContext context) {
+  static handleAPIError(BuildContext context, DioException e) {
     if (e.response != null) {
       if (e.response?.statusCode == 422) {
         ErrorModel errorResponse = ErrorModel.fromJson(e.response?.data);

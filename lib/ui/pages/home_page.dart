@@ -115,15 +115,15 @@ class _HomeState extends State<Homepage> {
             if (!grant) {
               return Center(
                 child: ElevatedButton.icon(
-                  icon: Icon(
-                    FontAwesomeIcons.checkCircle,
+                  icon: const Icon(
+                    FontAwesomeIcons.circleCheck,
                     color: Colors.white,
                   ),
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all(StadiumBorder()),
+                    shape: MaterialStateProperty.all(const StadiumBorder()),
                     backgroundColor: MaterialStateProperty.all(Colors.green),
                   ),
-                  label: Text(
+                  label: const Text(
                     'Cek Hak Akses Perangkat',
                     style: TextStyle(
                       color: Colors.white,
@@ -141,8 +141,8 @@ class _HomeState extends State<Homepage> {
               return RefreshIndicator(
                 onRefresh: () => _loadHomePage(),
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.only(
                       left: 0.0,
                       top: 20.0,
                       right: 10.0,
@@ -159,7 +159,7 @@ class _HomeState extends State<Homepage> {
                         future: _futureMenu,
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 10.0),
+                        padding: const EdgeInsets.only(left: 10.0),
                         width: double.infinity,
                         child: Container(
                           decoration: BoxDecoration(
@@ -175,9 +175,9 @@ class _HomeState extends State<Homepage> {
 
                               if (!snapshot.hasError) {
                                 _statusSummary =
-                                    snapshot.data as StatusSummary?;
+                                    snapshot.data;
                                 if (_statusSummary == null) {
-                                  return Card(
+                                  return const Card(
                                     child: Center(
                                       child: Text(
                                           'Data Ringkasan tidak ditemukan'),
@@ -192,14 +192,14 @@ class _HomeState extends State<Homepage> {
                                       Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.vertical(
+                                          borderRadius: const BorderRadius.vertical(
                                               top: Radius.circular(5.0)),
                                           color: Colors.orange[500],
                                         ),
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
                                           'Ringkasan\nPeriode ${Tools.formatIdDate('dd MMM yyyy', _statusSummary!.period!.startDate)} - ${Tools.formatIdDate('dd MMM yyyy', _statusSummary!.period!.endDate)}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18.0,
@@ -224,35 +224,33 @@ class _HomeState extends State<Homepage> {
                           ),
                         ),
                       ),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              Text(
-                                'Berita Terbaru',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            const Text(
+                              'Berita Terbaru',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                              GestureDetector(
-                                // onTap: () => Navigator.push(
-                                //   // context,
-                                //   // CupertinoPageRoute(
-                                //   //   builder: (context) => MessageTabPage(
-                                //   //       ScreenArguments(
-                                //   //           titleMenu: 'Berita',
-                                //   //           initialIndex: 1)),
-                                //   // ),
-                                // ),
-                                child: Text('Lihat Semua'),
-                              ),
-                            ],
-                          ),
+                            ),
+                            GestureDetector(
+                              // onTap: () => Navigator.push(
+                              //   // context,
+                              //   // CupertinoPageRoute(
+                              //   //   builder: (context) => MessageTabPage(
+                              //   //       ScreenArguments(
+                              //   //           titleMenu: 'Berita',
+                              //   //           initialIndex: 1)),
+                              //   // ),
+                              // ),
+                              child: const Text('Lihat Semua'),
+                            ),
+                          ],
                         ),
                       ),
                       FutureBuilder(
@@ -262,10 +260,10 @@ class _HomeState extends State<Homepage> {
                                 ConnectionState.waiting) {
                               //Untuk shimmer
                               return Container(
-                                padding: EdgeInsets.only(left: 20.0),
+                                padding: const EdgeInsets.only(left: 20.0),
                                 height: 150.0,
                                 child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   scrollDirection: Axis.horizontal,
                                   shrinkWrap: true,
                                   itemCount: 2,
@@ -277,14 +275,14 @@ class _HomeState extends State<Homepage> {
                             if (!snapshot.hasError) {
                               news = snapshot.data as List<News>;
                               return Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                   left: 20.0,
                                   // vertical: 10.0,
                                 ),
                                 height: 150.0,
                                 child: ListView.builder(
                                   // padding: EdgeInsets.only(bottom: 10.0, left: 2.0,),
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   scrollDirection: Axis.horizontal,
                                   itemCount: news.length,
                                   itemBuilder: (context, index) {
@@ -299,13 +297,13 @@ class _HomeState extends State<Homepage> {
                                         // );
                                       },
                                       child: Hero(
-                                        tag: 'news_photo_' + news[index].msgId,
+                                        tag: 'news_photo_${news[index].msgId}',
                                         child: Stack(
                                           alignment: Alignment.bottomLeft,
                                           children: <Widget>[
                                             Container(
                                               margin:
-                                                  EdgeInsets.only(right: 10.0),
+                                                  const EdgeInsets.only(right: 10.0),
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
@@ -330,12 +328,12 @@ class _HomeState extends State<Homepage> {
                                             ),
                                             Container(
                                               margin:
-                                                  EdgeInsets.only(right: 10.0),
+                                                  const EdgeInsets.only(right: 10.0),
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
                                                   0.6,
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                 left: 5.0,
                                                 bottom: 5.0,
                                                 top: 15.0,
@@ -350,7 +348,7 @@ class _HomeState extends State<Homepage> {
                                                         .withOpacity(0),
                                                   ],
                                                 ),
-                                                borderRadius: BorderRadius.only(
+                                                borderRadius: const BorderRadius.only(
                                                   bottomLeft:
                                                       Radius.circular(15.0),
                                                   bottomRight:
@@ -359,7 +357,7 @@ class _HomeState extends State<Homepage> {
                                               ),
                                               child: Text(
                                                 news[index].msgSubject,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 14.0,
                                                   fontWeight: FontWeight.bold,
@@ -447,7 +445,7 @@ class _HomeState extends State<Homepage> {
 
       statusSummary = StatusSummary.fromJson(response.data);
     } on DioException catch (e) {
-      Tools.handleAPIError(e, context);
+      Tools.handleAPIError(context, e);
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -486,16 +484,16 @@ class _HomeState extends State<Homepage> {
               barrierDismissible: false,
               builder: (_) {
                 return AlertDialog(
-                  title: Text('Perhatian'),
-                  content: Text('Sesi anda telah habis silahkan login kembali'),
+                  title: const Text('Perhatian'),
+                  content: const Text('Sesi anda telah habis silahkan login kembali'),
                   actions: <Widget>[
                     TextButton(
-                      child: Text('OK'),
+                      child: const Text('OK'),
                       onPressed: () {
                         Navigator.pop(context);
                         Navigator.of(context).pushAndRemoveUntil(
                           CupertinoPageRoute(
-                            builder: (BuildContext context) => Login(),
+                            builder: (BuildContext context) => const Login(),
                           ),
                           ModalRoute.withName('/'),
                         );
@@ -545,7 +543,7 @@ class _HomeState extends State<Homepage> {
   }
 
   Widget _updateAvailableWidget() => Container(
-        padding: EdgeInsets.only(left: 10.0),
+        padding: const EdgeInsets.only(left: 10.0),
         child: Card(
           color: Colors.green[300],
           child: Padding(
@@ -556,7 +554,7 @@ class _HomeState extends State<Homepage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   'Update aplikasi tersedia',
                   style: TextStyle(
                     color: Colors.white,
@@ -566,12 +564,12 @@ class _HomeState extends State<Homepage> {
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(EdgeInsets.zero),
                   ),
-                  icon: Icon(
+                  icon: const Icon(
                     FontAwesomeIcons.download,
                     color: Colors.white,
                     size: 10.0,
                   ),
-                  label: Text(
+                  label: const Text(
                     'Download',
                     style: TextStyle(
                       color: Colors.white,
@@ -601,7 +599,7 @@ class _ProfileWidget extends StatelessWidget {
   final String nik;
   final String inboxUnread;
 
-  _ProfileWidget({
+  const _ProfileWidget({
     required this.name,
     required this.nik,
     required this.inboxUnread,
@@ -610,11 +608,11 @@ class _ProfileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10.0),
+      padding: const EdgeInsets.only(left: 10.0),
       width: double.infinity,
       child: Card(
         elevation: 1.0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10.0),
           ),
@@ -645,7 +643,7 @@ class _ProfileWidget extends StatelessWidget {
                     //   // },
                     // ));
                   },
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundColor: Colors.orange,
                     radius: 30.0,
                     foregroundColor: Colors.white,
@@ -656,7 +654,7 @@ class _ProfileWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10.0,
               ),
               Expanded(
@@ -667,7 +665,7 @@ class _ProfileWidget extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.bold),
                       overflow: TextOverflow.fade,
                     ),
@@ -686,15 +684,15 @@ class _ProfileWidget extends StatelessWidget {
                   //   // ),
                   // ),
                   child: Container(
-                    margin: EdgeInsets.only(right: 10.0),
+                    margin: const EdgeInsets.only(right: 10.0),
                     alignment: Alignment.center,
                     child: badges.Badge(
                       badgeContent: Text(
                         inboxUnread,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                       showBadge: inboxUnread != '-',
-                      child: Icon(
+                      child: const Icon(
                         FontAwesomeIcons.inbox,
                         color: Colors.green,
                         size: 35.0,
@@ -715,7 +713,7 @@ class MenuUtama extends StatelessWidget {
   final BuildContext parentContext;
   final Future future;
 
-  MenuUtama({required this.parentContext, required this.future});
+  const MenuUtama({super.key, required this.parentContext, required this.future});
 
   @override
   Widget build(BuildContext context) {
@@ -724,16 +722,16 @@ class MenuUtama extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             var items = List<MenuUtamaPlaceholder>.generate(
-                8, (i) => MenuUtamaPlaceholder());
+                8, (i) => const MenuUtamaPlaceholder());
             return Container(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(left: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                     blurRadius: 5.0,
                     color: Colors.grey[200]!,
-                    offset: Offset(0, 0),
+                    offset: const Offset(0, 0),
                     spreadRadius: 2.0,
                   ),
                 ],
@@ -756,7 +754,7 @@ class MenuUtama extends StatelessWidget {
           }
           if (!snapshot.hasError) {
             return Padding(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: Card(
                 elevation: 3.0,
                 shape: RoundedRectangleBorder(
@@ -765,7 +763,7 @@ class MenuUtama extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     mainAxisSpacing: 2.0,
                     crossAxisCount: 4,
                     shrinkWrap: true,
@@ -830,17 +828,15 @@ class MenuUtama extends StatelessWidget {
               ),
             );
           } else {
-            return Container(
-              child: Card(
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(snapshot.error.toString()),
-                  ),
+            return Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(snapshot.error.toString()),
                 ),
               ),
             );
@@ -855,8 +851,8 @@ class MenuUtamaItem extends StatelessWidget {
   final String linkTo;
   final String iconUrl;
 
-  MenuUtamaItem(
-      {required this.menuId,
+  const MenuUtamaItem(
+      {super.key, required this.menuId,
       required this.displayName,
       required this.linkTo,
       required this.iconUrl});
@@ -882,7 +878,7 @@ class MenuUtamaItem extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: iconUrl,
               fit: BoxFit.contain,
-              placeholder: (context, url) => SpinKitRipple(
+              placeholder: (context, url) => const SpinKitRipple(
                 color: Colors.green,
               ),
             ),
@@ -891,7 +887,7 @@ class MenuUtamaItem extends StatelessWidget {
         Expanded(
           child: AutoSizeText(
             displayName,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12.0,
             ),
             textAlign: TextAlign.center,
@@ -905,6 +901,8 @@ class MenuUtamaItem extends StatelessWidget {
 }
 
 class MenuUtamaPlaceholder extends StatelessWidget {
+  const MenuUtamaPlaceholder({super.key});
+
   @override
   Widget build(BuildContext context) {
     return menuUtamaShimmer(true);
